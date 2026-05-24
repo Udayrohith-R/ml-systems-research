@@ -2,8 +2,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
 [![PyTorch 2.2+](https://img.shields.io/badge/PyTorch-2.2%2B-orange)](https://pytorch.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
-[![arXiv](https://img.shields.io/badge/arXiv-preprint-red)](https://arxiv.org)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue)](LICENSE)
 
 Two infrastructure primitives addressing open reliability and safety challenges in frontier model serving. Full technical report: [`latex/main.tex`](latex/main.tex).
 
