@@ -21,14 +21,14 @@ Two infrastructure primitives addressing open reliability and safety challenges 
 
 ### The Problem
 
-Test-time compute scaling has shifted inference toward tree-structured workloads — Monte Carlo Tree Search (MCTS), Best-of-N sampling, self-correction branching. Standard KV-caches assume contiguous linear sequences. At branch points, naive implementations copy the full KV state:
+Test-time compute scaling has shifted inference toward tree-structured workloads - Monte Carlo Tree Search (MCTS), Best-of-N sampling, self-correction branching. Standard KV-caches assume contiguous linear sequences. At branch points, naive implementations copy the full KV state:
 
 ```
 Linear cache fork cost: O(n × L × H × D)
 For LLaMA-3-8B: 512 tokens × 32 layers × 32 heads × 128 dim × 2 bytes ≈ 17GB per fork
 ```
 
-FractalCache reduces this to **O(n/S)** — a reference count increment per shared block.
+FractalCache reduces this to **O(n/S)**  a reference count increment per shared block.
 
 ### Architecture
 
@@ -48,7 +48,7 @@ root_path:   [Block 0] → [Block 1] → [Block 2]   (32 tokens)
      └── branch_c: [Block 0] → [Block 1] → [Block 6]
 ```
 
-Blocks 0 and 1 are shared across all paths (ref=3). No physical memory is duplicated until a branch mutates a shared block — at which point CoW allocates a private copy.
+Blocks 0 and 1 are shared across all paths (ref=3). No physical memory is duplicated until a branch mutates a shared block at which point CoW allocates a private copy.
 
 ### Performance
 
@@ -93,7 +93,7 @@ with manager.mcts_branch("root", branching_factor=8) as branches:
 
 ### The Problem
 
-Anthropic's mechanistic interpretability work has demonstrated that SAEs decompose transformer residual activations into interpretable feature directions. Activation steering — subtracting unsafe feature directions from the residual stream — is an effective safety intervention. However, naive implementations block the forward pass while computing the projection, adding 9.6ms overhead per pass — unacceptable for production serving.
+Anthropic's mechanistic interpretability work has demonstrated that SAEs decompose transformer residual activations into interpretable feature directions. Activation steering subtracting unsafe feature directions from the residual stream  is an effective safety intervention. However, naive implementations block the forward pass while computing the projection, adding 9.6ms overhead per pass unacceptable for production serving.
 
 ### Architecture
 
